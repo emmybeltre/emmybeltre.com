@@ -1,29 +1,29 @@
 <?php
-/* 
+/*
 	thumb.php v1.1
-	______________________________________________________________________ 
-	Creates a thumbnailed image based on info passed to it via $_GET. 
-	
-	Images are cached on the server, so server processing overhead is only 
+	______________________________________________________________________
+	Creates a thumbnailed image based on info passed to it via $_GET.
+
+	Images are cached on the server, so server processing overhead is only
 	needed for the first time the script runs on a particular image.
 	______________________________________________________________________
 	Requires:
 		GD Library
 	______________________________________________________________________
-	Copyright: 
+	Copyright:
 		(C) 2003 Chris Tomlinson. christo@mightystuff.net
 		http://mightystuff.net
-		
+
 		This library is free software; you can redistribute it and/or
 		modify it under the terms of the GNU Lesser General Public
 		License as published by the Free Software Foundation; either
 		version 2.1 of the License, or (at your option) any later version.
-		
+
 		This library is distributed in the hope that it will be useful,
 		but WITHOUT ANY WARRANTY; without even the implied warranty of
 		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 		Lesser General Public License for more details.
-	
+
 		http://www.gnu.org/copyleft/lesser.txt
 	______________________________________________________________________
 	Configuration:
@@ -31,10 +31,10 @@
 		set $image_error to be an image to be used when there is a problem parsing the image
 		set $site_config['path_thumbnail'] to be a write-permissable folder on your server relative to the DOCUMENT_ROOT for storing images so they cache on the server.
 		set $quality to be a value 0-100 for the resulting thumbnail jpeg quality
-	______________________________________________________________________	
+	______________________________________________________________________
 	Usage:
 		<img src="thumb.php?file=FILE&size=SIZE">
-		
+
 		Where:
 		FILE	=	the file to retrieve
 		SIZE	=	the maximum size of the thumbnail in pixels
@@ -54,9 +54,12 @@
 */
 //script configuration
 ini_set('memory_limit','64M');
-$site_config['document_root'] = $_SERVER['DOCUMENT_ROOT'];
+
+define("SITE_BASEPATH", dirname(__FILE__) . '/');
+
+$site_config['document_root'] = SITE_BASEPATH;
 $thumb_size = 128; //all thumbnails are this maximum width or height if not specified via get
-$site_config['absolute_uri']=str_replace('///','//',str_replace('thumb.php?'.$_SERVER['QUERY_STRING'],'',$_SERVER['REQUEST_URI']));
+$site_config['absolute_uri']=str_replace('///','//',str_replace('thumber.php?'.$_SERVER['QUERY_STRING'],'',$_SERVER['REQUEST_URI']));
 $site_config['path_thumbnail']=$site_config['absolute_uri'].'/cache/images/';	//where to cache thumbnails on the server, relative to the DOCUMENT_ROOT
 $image_error=$site_config['document_root'].$site_config['absolute_uri'].'/images/icons/image_error.png';	// used if no image could be found, or a gif image is specified
 
@@ -77,7 +80,7 @@ if (@$_GET["size"]<>0) {
 if (intval(@$_GET["sizex"])>0)
 {
 	$thumb_size_x=intval($_GET["sizex"]);
-	if (intval(@$_GET["sizey"])>0) 
+	if (intval(@$_GET["sizey"])>0)
 	{
 		$thumb_size_y=intval($_GET["sizey"]);
 	} else {
@@ -119,7 +122,7 @@ if (@$_GET['nocache']==1)
 if ((file_exists($cache_file)) && (@filemtime($cache_file)>@filemtime($filename)))
 {
 	header('Content-type: image/'.$fileextension);
-	header("Expires: Mon, 26 Jul 2030 05:00:00 GMT");    
+	header("Expires: Mon, 26 Jul 2030 05:00:00 GMT");
 	header('Content-Disposition: inline; filename='.str_replace('/','',md5($filename.$thumb_size.$thumb_size_x.$thumb_size_y.$quality).'.'.$fileextension));
 	echo (join('', file( $cache_file )));
 	exit; # no need to create thumbnail - it already exists in the cache
@@ -160,7 +163,7 @@ switch ($image_type)
 				# remove the cached thumbnail
 				unlink($cache_file);
 			}
-		} 
+		}
 		break;
 
 	case 3: # PNG
@@ -168,62 +171,62 @@ switch ($image_type)
 		{
 			# not a valid png file
 			$image = imagecreatefrompng ($image_error);
-			$file_type="png";			
+			$file_type="png";
 			if (file_exists($cache_file))
 			{
 				# remove the cached thumbnail
 				unlink($cache_file);
 			}
-		}			 
+		}
 		break;
 
-	case 1: # GIF 
+	case 1: # GIF
 		if (!$image = @imagecreatefromgif ($filename))
 		{
 			# not a valid gif file
 			$image = imagecreatefrompng ($image_error);
-			$file_type="png";			
+			$file_type="png";
 			if (file_exists($cache_file))
 			{
 				# remove the cached thumbnail
 				unlink($cache_file);
 			}
-		}			 
+		}
 		break;
 	default:
-		$image = imagecreatefrompng($image_error); 
+		$image = imagecreatefrompng($image_error);
 		break;
 
 }
 
 
-# define size of original image	
+# define size of original image
 $image_width = imagesx($image);
 $image_height = imagesy($image);
 
-# define size of the thumbnail	
+# define size of the thumbnail
 if (@$thumb_size_x>0)
 {
 	# define images x AND y
 	$thumb_width = $thumb_size_x;
 	$factor = $image_width/$thumb_size_x;
-	$thumb_height = intval($image_height / $factor); 
+	$thumb_height = intval($image_height / $factor);
 	if ($thumb_height>$thumb_size_y)
 	{
-		$thumb_height = $thumb_size_y; 
+		$thumb_height = $thumb_size_y;
 		$factor = $image_height/$thumb_size_y;
-		$thumb_width = intval($image_width / $factor); 
-	}		
+		$thumb_width = intval($image_width / $factor);
+	}
 } else {
 	# define images x OR y
-	$thumb_width = $thumb_size; 
+	$thumb_width = $thumb_size;
 	$factor = $image_width/$thumb_size;
-	$thumb_height = intval($image_height / $factor); 
+	$thumb_height = intval($image_height / $factor);
 	if ($thumb_height>$thumb_size)
 	{
-		$thumb_height = $thumb_size; 
+		$thumb_height = $thumb_size;
 		$factor = $image_height/$thumb_size;
-		$thumb_width = intval($image_width / $factor); 
+		$thumb_width = intval($image_width / $factor);
 	}
 }
 
@@ -232,22 +235,22 @@ if ($image_width < 4000)	//no point in resampling images larger than 4000 pixels
 {
 	if (substr_count(strtolower($gd_version['GD Version']), "2.")>0)
 	{
-		//GD 2.0 
+		//GD 2.0
 		$thumbnail = ImageCreateTrueColor($thumb_width, $thumb_height);
 		imagecopyresampled($thumbnail, $image, 0, 0, 0, 0, $thumb_width, $thumb_height, $image_width, $image_height);
 	} else {
-		//GD 1.0 
+		//GD 1.0
 		$thumbnail = imagecreate($thumb_width, $thumb_height);
-		imagecopyresized($thumbnail, $image, 0, 0, 0, 0, $thumb_width, $thumb_height, $image_width, $image_height);			
-	}	
+		imagecopyresized($thumbnail, $image, 0, 0, 0, 0, $thumb_width, $thumb_height, $image_width, $image_height);
+	}
 } else {
 	if (substr_count(strtolower($gd_version['GD Version']), "2.")>0)
 	{
-		# GD 2.0 
+		# GD 2.0
 		$thumbnail = ImageCreateTrueColor($thumb_width, $thumb_height);
 		imagecopyresized($thumbnail, $image, 0, 0, 0, 0, $thumb_width, $thumb_height, $image_width, $image_height);
 	} else {
-		# GD 1.0 
+		# GD 1.0
 		$thumbnail = imagecreate($thumb_width, $thumb_height);
 		imagecopyresized($thumbnail, $image, 0, 0, 0, 0, $thumb_width, $thumb_height, $image_width, $image_height);
 	}
@@ -277,21 +280,21 @@ switch ($image_type)
 		header('Content-type: image/png');
 		header('Content-Disposition: inline; filename='.str_replace('/','',md5($filename.$thumb_size.$thumb_size_x.$thumb_size_y.$quality).'.png'));
 		@imagepng($thumbnail,$cache_file);
-		imagepng($thumbnail); 
+		imagepng($thumbnail);
 		break;
 
-	case 1:	# GIF 
+	case 1:	# GIF
 		if (function_exists('imagegif'))
 		{
 			header('Content-type: image/gif');
 			header('Content-Disposition: inline; filename='.str_replace('/','',md5($filename.$thumb_size.$thumb_size_x.$thumb_size_y.$quality).'.gif'));
 			@imagegif($thumbnail,$cache_file);
-			imagegif($thumbnail);  
+			imagegif($thumbnail);
 		} else {
 			header('Content-type: image/jpeg');
 			header('Content-Disposition: inline; filename='.str_replace('/','',md5($filename.$thumb_size.$thumb_size_x.$thumb_size_y.$quality).'.jpg'));
 			@imagejpeg($thumbnail,$cache_file);
-			imagejpeg($thumbnail); 
+			imagejpeg($thumbnail);
 		}
 		break;
 }
