@@ -1,0 +1,3 @@
+type:Print
+title:Kankus 
+desc:This was one of several promotions done for Kankus convenience stores. The promotion was with the Times Free Press. With a purchase of a coffee at a Kankus location customers would then be able to purchase a daily newspaper for only a penny.

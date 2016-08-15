@@ -1,0 +1,3 @@
+type:Print
+title: Drinks
+desc: This was a spread done for Chatter Magazine. The spread was highlighting St. Patrick's Day themed drinks. Chatter is published by the Times Free Press

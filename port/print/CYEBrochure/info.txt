@@ -1,0 +1,3 @@
+type:Print
+title: CYE Brochure
+desc: This gate fold brochure was done for the Center for Youth Evangelism. This is part of a new campaign that serves Adventist youths. It also gives figures about member retention and a new program called "Church of Refuge"

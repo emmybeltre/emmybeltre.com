@@ -1,0 +1,3 @@
+type:Photography
+title:Jogger 
+desc:I snapped this photo while I was in Chicago thinking that I could use it later on. I ended up using it for a magazine about being active. The effect was simple in where I simply isolated the runner and highlighted the yellow tint of her jersey while completely desaturating the background of the photograph

@@ -1,0 +1,3 @@
+type:Print
+title: Cupid
+desc: This Valentines info-graphic was done for Chatter magazine. I used Illustrator to make the icons and then finished the spread in InDesign.

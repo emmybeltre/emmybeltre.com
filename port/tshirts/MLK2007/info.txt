@@ -1,0 +1,3 @@
+type:Tshirts
+title:MLK Day 2007 
+desc:This shirt was made for Southern Adventist University's community service day. Students wore these as they carried their respective volunteer duties throughout the Chattanooga area. 

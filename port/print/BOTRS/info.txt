@@ -1,0 +1,3 @@
+type:Print
+title: Brothers of the Rising Sun
+desc: This book cover was done for an upcoming work by Remnant Renaissance Publishing Co. I used Illustrator to complete the final digital illustration.

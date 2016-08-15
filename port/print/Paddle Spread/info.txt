@@ -1,0 +1,3 @@
+type:Print
+title: Paddling
+desc: This spread was done for GetOut magazine. I used Photoshop to make the game cards as well as the graphics that went on the cards. The rest of the spread was finished in InDesign

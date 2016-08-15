@@ -1,0 +1,3 @@
+type:Tshirts
+title:Cinco De Poplar 
+desc:This project was done for a girls flag football team. The reason the number five was chosen and a Poplar tree was because it was to represent where the original four team members resided. They were all seniors in college and played together throughout college. 

@@ -1,0 +1,3 @@
+type:LOGOS
+title: Bethel 5K
+desc: This logo was done for the Bethel 5k. It was used on various flyers, posters, and T-Shirts in order to market the event.

@@ -1,0 +1,3 @@
+type:Print
+title: Bethel 5k 2013
+desc: This poster was done for the 2013 Bethel Bible Village 5k. Bethel Bible Village is a non-profit organization in Hixson, TN that serves underprivileged youth in the Southeast Tennessee area.

@@ -1,0 +1,3 @@
+type:Print
+title:Space 
+desc:I made this poster for myself. I wanted to play with the lens flare tool in Photoshop to see what I could come up with. I was pleased with the final result and what started out as a tutorial became something that I would later utilize for other projects.

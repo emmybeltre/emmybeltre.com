@@ -1,0 +1,3 @@
+type:Tshirts
+title:BrownBear 
+desc:This shirt was made during the summer of 2010. It was the first shirt that I made specifically for myself. I used a photograph of a bear that I had found online and simplified it in Photoshop. The results were simple but very effective. Plus, who doesn't love brown bears?

@@ -1,0 +1,3 @@
+type:LOGOS
+title:Remnant Renaissance 
+desc:This is a small publishing company based in Chicago, IL. The founder wanted to primarily focus on a brand that would reflect the feel of an already established publishing company.
